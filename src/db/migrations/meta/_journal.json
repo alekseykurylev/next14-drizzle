@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1707423289077,
+      "tag": "0000_thick_kronos",
+      "breakpoints": true
+    }
+  ]
+}
