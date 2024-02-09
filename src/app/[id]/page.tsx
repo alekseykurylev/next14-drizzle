@@ -7,8 +7,6 @@ export default async function Page({ params }: { params: { id: number } }) {
     where: eq(catalogProcedure.id, params.id),
   });
 
-  console.log(data);
-
   return (
     <main className="max-w-7xl my-5 mx-auto px-3">
       <div className=" relative  overflow-hidden ">
