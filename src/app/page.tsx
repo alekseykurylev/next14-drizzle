@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "@/db";
-import { users } from "@/db/migrations/schema";
+import { catalogProcedure } from "@/db/migrations/schema";
 
 interface SearchParamsProps {
   searchParams: {
@@ -13,13 +13,14 @@ interface SearchParamsProps {
 export default async function Home({ searchParams }: SearchParamsProps) {
   const pageNumber = Number(searchParams.page ?? 1);
 
-  const numberOfItems = 6;
+  const numberOfItems = 10;
 
-  const totalUsers = await db
+  const totalProducts = await db
     .select({ count: sql<number>`count(*)` })
-    .from(users);
+    .from(catalogProcedure);
+  // .where(eq(wpPosts.postType, "product"));
 
-  const numberOfPages = Math.ceil(totalUsers[0].count / numberOfItems);
+  const numberOfPages = Math.ceil(totalProducts[0].count / numberOfItems);
 
   let safePageNumber = 1;
 
@@ -34,7 +35,12 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   const offsetItems =
     safePageNumber > 1 ? (safePageNumber - 1) * numberOfItems : 0;
 
-  const allUsers = await db.select().from(users).limit(6).offset(offsetItems);
+  const products = await db
+    .select()
+    .from(catalogProcedure)
+    // .where(eq(wpPosts.postType, "product"))
+    .limit(10)
+    .offset(offsetItems);
 
   const prevSearchParams = new URLSearchParams();
   const nextSearchParams = new URLSearchParams();
@@ -56,39 +62,59 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   }
 
   return (
-    <main className="max-w-7xl my-5 mx-auto px-3">
-      <h2 className="text-center text-2xl font-bold my-5">Users </h2>
-      <div className=" relative  overflow-hidden ">
-        <table className=" border-2  rounded-xl border-slate-700 table-fixed w-full text-sm">
+    <main className="my-10 mx-auto px-10">
+      <div className="relative overflow-hidden ">
+        <div>Всего: {totalProducts[0].count}</div>
+        <table className=" border-2 rounded-xl border-slate-700 table-fixed w-full text-sm">
           <thead>
             <tr>
-              <th className="border-b-2 border-slate-700  font-medium p-4 pl-8  pb-3 text-left">
-                ID
+              <th className="border-b-2 border-slate-700  font-medium p-4 pl-8 pb-3 text-left w-20">
+                Тип
               </th>
               <th className="border-b-2 border-slate-700 font-medium p-4 pl-8  pb-3 text-left">
-                Name
+                № извещения
               </th>
               <th className="border-b-2 border-slate-700 font-medium p-4 pl-8  pb-3 text-left">
-                Email
+                Наименование
+              </th>
+              <th className="border-b-2 border-slate-700 font-medium p-4 pl-8  pb-3 text-left">
+                Заказчик
+              </th>
+
+              <th className="border-b-2 border-slate-700 font-medium p-4 pl-8  pb-3 text-left">
+                Дата публикации
+              </th>
+              <th className="border-b-2 border-slate-700 font-medium p-4 pl-8  pb-3 text-left">
+                Завершение подачи
               </th>
             </tr>
           </thead>
           <tbody>
-            {allUsers.map((user) => (
-              <tr key={user.id}>
+            {products.map((product) => (
+              <tr key={product.id}>
+                <td className="border-b border-slate-700  p-4 pl-8 ">
+                  {product.type}
+                </td>
                 <td className="border-b border-slate-700  p-4 pl-8  ">
-                  {user.id}
+                  {product.registrationNumber}
                 </td>
                 <td className="border-b border-slate-700  p-4 pl-8 ">
                   <Link
-                    href={`/${String(user.id)}`}
+                    href={`/${String(product.id)}`}
                     style={{ textDecoration: "underline" }}
                   >
-                    {user.name}
+                    {product.name}
                   </Link>
                 </td>
                 <td className="border-b border-slate-700  p-4 pl-8  ">
-                  {user.email}
+                  {product.placerFullName}
+                </td>
+
+                <td className="border-b border-slate-700  p-4 pl-8  ">
+                  {product.publicationDatetime}
+                </td>
+                <td className="border-b border-slate-700  p-4 pl-8  ">
+                  {product.modificationDatetime}
                 </td>
               </tr>
             ))}

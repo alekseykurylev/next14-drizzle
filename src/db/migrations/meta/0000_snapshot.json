@@ -4,29 +4,5222 @@
   "version": "5",
   "dialect": "mysql",
   "tables": {
-    "users": {
-      "name": "users",
+    "catalog_clarification_action": {
+      "name": "catalog_clarification_action",
       "columns": {
         "id": {
-          "autoincrement": false,
+          "autoincrement": true,
           "name": "id",
-          "type": "bigint(20) unsigned",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "request_id": {
+          "autoincrement": false,
+          "name": "request_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
         "name": {
           "autoincrement": false,
           "name": "name",
-          "type": "varchar(256)",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "autoincrement": false,
+          "name": "url",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "priority": {
+          "autoincrement": false,
+          "name": "priority",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role": {
+          "autoincrement": false,
+          "name": "allow_role",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role_except": {
+          "autoincrement": false,
+          "name": "allow_role_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_permission": {
+          "autoincrement": false,
+          "name": "allow_permission",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_permission_except": {
+          "autoincrement": false,
+          "name": "allow_permission_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_clarification_status": {
+          "autoincrement": false,
+          "name": "allow_clarification_status",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_clarification_status_except": {
+          "autoincrement": false,
+          "name": "allow_clarification_status_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_organization": {
+          "autoincrement": false,
+          "name": "allow_organization",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "style": {
+          "autoincrement": false,
+          "name": "style",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "opened_at": {
+          "autoincrement": false,
+          "name": "opened_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_19BCBFB1427EB8A5": {
+          "name": "IDX_19BCBFB1427EB8A5",
+          "columns": [
+            "request_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_ActionCode": {
+          "name": "Catalog_Clarification_ActionCode",
+          "columns": [
+            "code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_19BCBFB1427EB8A5": {
+          "name": "FK_19BCBFB1427EB8A5",
+          "tableFrom": "catalog_clarification_action",
+          "tableTo": "catalog_clarification_request",
+          "columnsFrom": [
+            "request_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_clarification_event": {
+      "name": "catalog_clarification_event",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "request_id": {
+          "autoincrement": false,
+          "name": "request_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publication_datetime": {
+          "autoincrement": false,
+          "name": "publication_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url": {
+          "autoincrement": false,
+          "name": "url",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canceled": {
+          "autoincrement": false,
+          "name": "canceled",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role": {
+          "autoincrement": false,
+          "name": "allow_role",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_organization": {
+          "autoincrement": false,
+          "name": "allow_organization",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "event_type": {
+          "autoincrement": false,
+          "name": "event_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_956427DF427EB8A5": {
+          "name": "IDX_956427DF427EB8A5",
+          "columns": [
+            "request_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_EventGuid": {
+          "name": "Catalog_Clarification_EventGuid",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_956427DF427EB8A5": {
+          "name": "FK_956427DF427EB8A5",
+          "tableFrom": "catalog_clarification_event",
+          "tableTo": "catalog_clarification_request",
+          "columnsFrom": [
+            "request_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_clarification_interaction": {
+      "name": "catalog_clarification_interaction",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "request_id": {
+          "autoincrement": false,
+          "name": "request_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "member_id": {
+          "autoincrement": false,
+          "name": "member_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_id": {
+          "autoincrement": false,
+          "name": "organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_read": {
+          "autoincrement": false,
+          "name": "is_read",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_23BBE7B6427EB8A5": {
+          "name": "IDX_23BBE7B6427EB8A5",
+          "columns": [
+            "request_id"
+          ],
+          "isUnique": false
+        },
+        "Clarification_Organization_Action_Member": {
+          "name": "Clarification_Organization_Action_Member",
+          "columns": [
+            "member_id"
+          ],
+          "isUnique": false
+        },
+        "Clarification_Organization_Action_Organization": {
+          "name": "Clarification_Organization_Action_Organization",
+          "columns": [
+            "organization_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_23BBE7B6427EB8A5": {
+          "name": "FK_23BBE7B6427EB8A5",
+          "tableFrom": "catalog_clarification_interaction",
+          "tableTo": "catalog_clarification_request",
+          "columnsFrom": [
+            "request_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_clarification_request": {
+      "name": "catalog_clarification_request",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_id": {
+          "autoincrement": false,
+          "name": "status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type_id": {
+          "autoincrement": false,
+          "name": "type_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_guid": {
+          "autoincrement": false,
+          "name": "lot_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_subject": {
+          "autoincrement": false,
+          "name": "lot_subject",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lot_ordinal_number": {
+          "autoincrement": false,
+          "name": "lot_ordinal_number",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_url_vsrz": {
+          "autoincrement": false,
+          "name": "lot_url_vsrz",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_guid": {
+          "autoincrement": false,
+          "name": "procedure_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_id": {
+          "autoincrement": false,
+          "name": "procedure_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_name": {
+          "autoincrement": false,
+          "name": "procedure_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_type": {
+          "autoincrement": false,
+          "name": "procedure_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_url_vsrz": {
+          "autoincrement": false,
+          "name": "procedure_url_vsrz",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_registration_number": {
+          "autoincrement": false,
+          "name": "procedure_registration_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_guid": {
+          "autoincrement": false,
+          "name": "organization_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_id": {
+          "autoincrement": false,
+          "name": "organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_full_name": {
+          "autoincrement": false,
+          "name": "organization_full_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_short_name": {
+          "autoincrement": false,
+          "name": "organization_short_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_inn": {
+          "autoincrement": false,
+          "name": "organization_inn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_kpp": {
+          "autoincrement": false,
+          "name": "organization_kpp",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_ogrn": {
+          "autoincrement": false,
+          "name": "organization_ogrn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_role": {
+          "autoincrement": false,
+          "name": "organization_role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subject": {
+          "autoincrement": false,
+          "name": "subject",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "number": {
+          "autoincrement": false,
+          "name": "number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publication_datetime": {
+          "autoincrement": false,
+          "name": "publication_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "regulated_datetime": {
+          "autoincrement": false,
+          "name": "regulated_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "archive": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "archive",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "autoincrement": false,
+          "name": "url",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_99AE8EDE6BF700BD": {
+          "name": "IDX_99AE8EDE6BF700BD",
+          "columns": [
+            "status_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_99AE8EDEC54C8C93": {
+          "name": "IDX_99AE8EDEC54C8C93",
+          "columns": [
+            "type_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_Number": {
+          "name": "Catalog_Clarification_Number",
+          "columns": [
+            "number"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_OrganizationGuid": {
+          "name": "Catalog_Clarification_OrganizationGuid",
+          "columns": [
+            "organization_guid"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_OrganizationId": {
+          "name": "Catalog_Clarification_OrganizationId",
+          "columns": [
+            "organization_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_OrganizationInn": {
+          "name": "Catalog_Clarification_OrganizationInn",
+          "columns": [
+            "organization_inn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_OrganizationKpp": {
+          "name": "Catalog_Clarification_OrganizationKpp",
+          "columns": [
+            "organization_kpp"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_OrganizationOgrn": {
+          "name": "Catalog_Clarification_OrganizationOgrn",
+          "columns": [
+            "organization_ogrn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_LotGuid": {
+          "name": "Catalog_Clarification_LotGuid",
+          "columns": [
+            "lot_guid"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_LotId": {
+          "name": "Catalog_Clarification_LotId",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_ProcedureGuid": {
+          "name": "Catalog_Clarification_ProcedureGuid",
+          "columns": [
+            "procedure_guid"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_ProcedureId": {
+          "name": "Catalog_Clarification_ProcedureId",
+          "columns": [
+            "procedure_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_ProcedureType": {
+          "name": "Catalog_Clarification_ProcedureType",
+          "columns": [
+            "procedure_type"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_ProcedureRegistrationNumber": {
+          "name": "Catalog_Clarification_ProcedureRegistrationNumber",
+          "columns": [
+            "procedure_registration_number"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Clarification_Guid": {
+          "name": "Catalog_Clarification_Guid",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_99AE8EDE6BF700BD": {
+          "name": "FK_99AE8EDE6BF700BD",
+          "tableFrom": "catalog_clarification_request",
+          "tableTo": "catalog_clarification_status",
+          "columnsFrom": [
+            "status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_99AE8EDEC54C8C93": {
+          "name": "FK_99AE8EDEC54C8C93",
+          "tableFrom": "catalog_clarification_request",
+          "tableTo": "catalog_clarification_type",
+          "columnsFrom": [
+            "type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_clarification_status": {
+      "name": "catalog_clarification_status",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "UNIQ_2570563F77153098": {
+          "name": "UNIQ_2570563F77153098",
+          "columns": [
+            "code"
+          ]
+        }
+      }
+    },
+    "catalog_clarification_type": {
+      "name": "catalog_clarification_type",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "UNIQ_979965C177153098": {
+          "name": "UNIQ_979965C177153098",
+          "columns": [
+            "code"
+          ]
+        }
+      }
+    },
+    "catalog_contract": {
+      "name": "catalog_contract",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_id": {
+          "autoincrement": false,
+          "name": "status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "registration_number": {
+          "autoincrement": false,
+          "name": "registration_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordinal_number": {
+          "autoincrement": false,
+          "name": "ordinal_number",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_guid": {
+          "autoincrement": false,
+          "name": "lot_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_subject": {
+          "autoincrement": false,
+          "name": "lot_subject",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_ordinal_number": {
+          "autoincrement": false,
+          "name": "lot_ordinal_number",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_url_vsrz": {
+          "autoincrement": false,
+          "name": "lot_url_vsrz",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_guid": {
+          "autoincrement": false,
+          "name": "procedure_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_id": {
+          "autoincrement": false,
+          "name": "procedure_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_name": {
+          "autoincrement": false,
+          "name": "procedure_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_url_vsrz": {
+          "autoincrement": false,
+          "name": "procedure_url_vsrz",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_registration_number": {
+          "autoincrement": false,
+          "name": "procedure_registration_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_type": {
+          "autoincrement": false,
+          "name": "procedure_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customer_guid": {
+          "autoincrement": false,
+          "name": "customer_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_id": {
+          "autoincrement": false,
+          "name": "customer_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_full_name": {
+          "autoincrement": false,
+          "name": "customer_full_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_short_name": {
+          "autoincrement": false,
+          "name": "customer_short_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customer_inn": {
+          "autoincrement": false,
+          "name": "customer_inn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_kpp": {
+          "autoincrement": false,
+          "name": "customer_kpp",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_ogrn": {
+          "autoincrement": false,
+          "name": "customer_ogrn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_role": {
+          "autoincrement": false,
+          "name": "customer_role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "supplier_guid": {
+          "autoincrement": false,
+          "name": "supplier_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "supplier_id": {
+          "autoincrement": false,
+          "name": "supplier_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "supplier_full_name": {
+          "autoincrement": false,
+          "name": "supplier_full_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "supplier_short_name": {
+          "autoincrement": false,
+          "name": "supplier_short_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "supplier_inn": {
+          "autoincrement": false,
+          "name": "supplier_inn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "supplier_kpp": {
+          "autoincrement": false,
+          "name": "supplier_kpp",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "supplier_ogrn": {
+          "autoincrement": false,
+          "name": "supplier_ogrn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "supplier_role": {
+          "autoincrement": false,
+          "name": "supplier_role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price": {
+          "autoincrement": false,
+          "name": "price",
+          "type": "decimal(31,11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agreement_price": {
+          "autoincrement": false,
+          "name": "agreement_price",
+          "type": "decimal(20,2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_without_preference": {
+          "autoincrement": false,
+          "name": "price_without_preference",
+          "type": "decimal(20,2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "currency_Id": {
+          "autoincrement": false,
+          "name": "currency_Id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "execution_requirement": {
+          "autoincrement": false,
+          "name": "execution_requirement",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "use_preference": {
+          "autoincrement": false,
+          "name": "use_preference",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "autoincrement": false,
+          "name": "active",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "version": {
+          "autoincrement": false,
+          "name": "version",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "regulated_datetime": {
+          "autoincrement": false,
+          "name": "regulated_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "formation_sign_datetime": {
+          "autoincrement": false,
+          "name": "formation_sign_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "supplier_sign_datetime": {
+          "autoincrement": false,
+          "name": "supplier_sign_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customer_sign_datetime": {
+          "autoincrement": false,
+          "name": "customer_sign_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "start_price": {
+          "autoincrement": false,
+          "name": "start_price",
+          "type": "double",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "conclude_contract_right": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "conclude_contract_right",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_price_decrease": {
+          "autoincrement": false,
+          "name": "max_price_decrease",
+          "type": "decimal(30,11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "saving": {
+          "autoincrement": false,
+          "name": "saving",
+          "type": "decimal(22,2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "calculated_deviation_date": {
+          "autoincrement": false,
+          "name": "calculated_deviation_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_DB58F6476BF700BD": {
+          "name": "IDX_DB58F6476BF700BD",
+          "columns": [
+            "status_id"
+          ],
+          "isUnique": false
+        },
+        "Contract_Procedure_Registration_Number": {
+          "name": "Contract_Procedure_Registration_Number",
+          "columns": [
+            "procedure_registration_number"
+          ],
+          "isUnique": false
+        },
+        "Contract_Registration_Number": {
+          "name": "Contract_Registration_Number",
+          "columns": [
+            "registration_number"
+          ],
+          "isUnique": false
+        },
+        "Contract_GUID": {
+          "name": "Contract_GUID",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        },
+        "Contract_Lot_GUID": {
+          "name": "Contract_Lot_GUID",
+          "columns": [
+            "lot_guid"
+          ],
+          "isUnique": false
+        },
+        "Contract_Lot_ID": {
+          "name": "Contract_Lot_ID",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "Contract_Procedure_GUID": {
+          "name": "Contract_Procedure_GUID",
+          "columns": [
+            "procedure_guid"
+          ],
+          "isUnique": false
+        },
+        "Contract_Procedure_ID": {
+          "name": "Contract_Procedure_ID",
+          "columns": [
+            "procedure_id"
+          ],
+          "isUnique": false
+        },
+        "Contract_Customer_GUID": {
+          "name": "Contract_Customer_GUID",
+          "columns": [
+            "customer_guid"
+          ],
+          "isUnique": false
+        },
+        "Contract_Customer_ID": {
+          "name": "Contract_Customer_ID",
+          "columns": [
+            "customer_id"
+          ],
+          "isUnique": false
+        },
+        "Contract_Supplier_GUID": {
+          "name": "Contract_Supplier_GUID",
+          "columns": [
+            "supplier_guid"
+          ],
+          "isUnique": false
+        },
+        "Contract_Supplier_ID": {
+          "name": "Contract_Supplier_ID",
+          "columns": [
+            "supplier_id"
+          ],
+          "isUnique": false
+        },
+        "Contract_Currency_ID": {
+          "name": "Contract_Currency_ID",
+          "columns": [
+            "currency_Id"
+          ],
+          "isUnique": false
+        },
+        "Contract_Customer_INN": {
+          "name": "Contract_Customer_INN",
+          "columns": [
+            "customer_inn"
+          ],
+          "isUnique": false
+        },
+        "Contract_Customer_KPP": {
+          "name": "Contract_Customer_KPP",
+          "columns": [
+            "customer_kpp"
+          ],
+          "isUnique": false
+        },
+        "Contract_Customer_ORGN": {
+          "name": "Contract_Customer_ORGN",
+          "columns": [
+            "customer_ogrn"
+          ],
+          "isUnique": false
+        },
+        "Contract_Customer_Role": {
+          "name": "Contract_Customer_Role",
+          "columns": [
+            "customer_role"
+          ],
+          "isUnique": false
+        },
+        "Contract_Supplier_INN": {
+          "name": "Contract_Supplier_INN",
+          "columns": [
+            "supplier_inn"
+          ],
+          "isUnique": false
+        },
+        "Contract_Supplier_KPP": {
+          "name": "Contract_Supplier_KPP",
+          "columns": [
+            "supplier_kpp"
+          ],
+          "isUnique": false
+        },
+        "Contract_Supplier_OGRN": {
+          "name": "Contract_Supplier_OGRN",
+          "columns": [
+            "supplier_ogrn"
+          ],
+          "isUnique": false
+        },
+        "Contract_Supplier_Role": {
+          "name": "Contract_Supplier_Role",
+          "columns": [
+            "supplier_role"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_DB58F6476BF700BD": {
+          "name": "FK_DB58F6476BF700BD",
+          "tableFrom": "catalog_contract",
+          "tableTo": "catalog_contract_status",
+          "columnsFrom": [
+            "status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_contract_action": {
+      "name": "catalog_contract_action",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contract_id": {
+          "autoincrement": false,
+          "name": "contract_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "autoincrement": false,
+          "name": "url",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "priority": {
+          "autoincrement": false,
+          "name": "priority",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role": {
+          "autoincrement": false,
+          "name": "allow_role",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role_except": {
+          "autoincrement": false,
+          "name": "allow_role_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_permission": {
+          "autoincrement": false,
+          "name": "allow_permission",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_permission_except": {
+          "autoincrement": false,
+          "name": "allow_permission_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_contract_status": {
+          "autoincrement": false,
+          "name": "allow_contract_status",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_contract_status_except": {
+          "autoincrement": false,
+          "name": "allow_contract_status_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_organization": {
+          "autoincrement": false,
+          "name": "allow_organization",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "style": {
+          "autoincrement": false,
+          "name": "style",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "opened_at": {
+          "autoincrement": false,
+          "name": "opened_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_5AE60702576E0FD": {
+          "name": "IDX_5AE60702576E0FD",
+          "columns": [
+            "contract_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Contract_Action_Code": {
+          "name": "Catalog_Contract_Action_Code",
+          "columns": [
+            "code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_5AE60702576E0FD": {
+          "name": "FK_5AE60702576E0FD",
+          "tableFrom": "catalog_contract_action",
+          "tableTo": "catalog_contract",
+          "columnsFrom": [
+            "contract_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_contract_agreement": {
+      "name": "catalog_contract_agreement",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contract_id": {
+          "autoincrement": false,
+          "name": "contract_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_id": {
+          "autoincrement": false,
+          "name": "status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "version": {
+          "autoincrement": false,
+          "name": "version",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number": {
+          "autoincrement": false,
+          "name": "number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "autoincrement": false,
+          "name": "price",
+          "type": "decimal(20,2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "outside_etp": {
+          "autoincrement": false,
+          "name": "outside_etp",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_finish": {
+          "autoincrement": false,
+          "name": "is_finish",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_D574E23C2576E0FD": {
+          "name": "IDX_D574E23C2576E0FD",
+          "columns": [
+            "contract_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_D574E23C6BF700BD": {
+          "name": "IDX_D574E23C6BF700BD",
+          "columns": [
+            "status_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_D574E23C2576E0FD": {
+          "name": "FK_D574E23C2576E0FD",
+          "tableFrom": "catalog_contract_agreement",
+          "tableTo": "catalog_contract",
+          "columnsFrom": [
+            "contract_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_D574E23C6BF700BD": {
+          "name": "FK_D574E23C6BF700BD",
+          "tableFrom": "catalog_contract_agreement",
+          "tableTo": "catalog_contract_agreement_status",
+          "columnsFrom": [
+            "status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_contract_agreement_event": {
+      "name": "catalog_contract_agreement_event",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "agreement_id": {
+          "autoincrement": false,
+          "name": "agreement_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publication_datetime": {
+          "autoincrement": false,
+          "name": "publication_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url": {
+          "autoincrement": false,
+          "name": "url",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role": {
+          "autoincrement": false,
+          "name": "allow_role",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_organization": {
+          "autoincrement": false,
+          "name": "allow_organization",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_FF25754224890B2B": {
+          "name": "IDX_FF25754224890B2B",
+          "columns": [
+            "agreement_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Contract_Event_GUID": {
+          "name": "Catalog_Contract_Event_GUID",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_FF25754224890B2B": {
+          "name": "FK_FF25754224890B2B",
+          "tableFrom": "catalog_contract_agreement_event",
+          "tableTo": "catalog_contract_agreement",
+          "columnsFrom": [
+            "agreement_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_contract_agreement_status": {
+      "name": "catalog_contract_agreement_status",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "Catalog_Contract_Agreement_Status_Code": {
+          "name": "Catalog_Contract_Agreement_Status_Code",
+          "columns": [
+            "code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "catalog_contract_event": {
+      "name": "catalog_contract_event",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contract_id": {
+          "autoincrement": false,
+          "name": "contract_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publication_datetime": {
+          "autoincrement": false,
+          "name": "publication_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url": {
+          "autoincrement": false,
+          "name": "url",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canceled": {
+          "autoincrement": false,
+          "name": "canceled",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role": {
+          "autoincrement": false,
+          "name": "allow_role",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_organization": {
+          "autoincrement": false,
+          "name": "allow_organization",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_EBDA848E2576E0FD": {
+          "name": "IDX_EBDA848E2576E0FD",
+          "columns": [
+            "contract_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Contract_Event_GUID": {
+          "name": "Catalog_Contract_Event_GUID",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_EBDA848E2576E0FD": {
+          "name": "FK_EBDA848E2576E0FD",
+          "tableFrom": "catalog_contract_event",
+          "tableTo": "catalog_contract",
+          "columnsFrom": [
+            "contract_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_contract_status": {
+      "name": "catalog_contract_status",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "Catalog_Contract_Status_Code": {
+          "name": "Catalog_Contract_Status_Code",
+          "columns": [
+            "code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "catalog_organization_parameter": {
+      "name": "catalog_organization_parameter",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "autoincrement": false,
+          "name": "value",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_id": {
+          "autoincrement": false,
+          "name": "organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_guid": {
+          "autoincrement": false,
+          "name": "organization_guid",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "autoincrement": false,
+          "name": "user_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_guid": {
+          "autoincrement": false,
+          "name": "user_guid",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_1C6530357D8C8404": {
+          "name": "IDX_1C6530357D8C8404",
+          "columns": [
+            "organization_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_2C1444447D8C8411": {
+          "name": "IDX_2C1444447D8C8411",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_3C1530357D8C8404": {
+          "name": "IDX_3C1530357D8C8404",
+          "columns": [
+            "organization_guid"
+          ],
+          "isUnique": false
+        },
+        "IDX_4C0110257D8C8411": {
+          "name": "IDX_4C0110257D8C8411",
+          "columns": [
+            "user_guid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure": {
+      "name": "catalog_procedure",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_id": {
+          "autoincrement": false,
+          "name": "status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type_id": {
+          "autoincrement": false,
+          "name": "type_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "parent_id": {
+          "autoincrement": false,
+          "name": "parent_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "registration_number": {
+          "autoincrement": false,
+          "name": "registration_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version": {
+          "autoincrement": false,
+          "name": "version",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publication_datetime": {
+          "autoincrement": false,
+          "name": "publication_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "modification_datetime": {
+          "autoincrement": false,
+          "name": "modification_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_id": {
+          "autoincrement": false,
+          "name": "placer_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "placer_full_name": {
+          "autoincrement": false,
+          "name": "placer_full_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_short_name": {
+          "autoincrement": false,
+          "name": "placer_short_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_inn": {
+          "autoincrement": false,
+          "name": "placer_inn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_kpp": {
+          "autoincrement": false,
+          "name": "placer_kpp",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_ogrn": {
+          "autoincrement": false,
+          "name": "placer_ogrn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_guid": {
+          "autoincrement": false,
+          "name": "placer_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_role": {
+          "autoincrement": false,
+          "name": "placer_role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_region_id": {
+          "autoincrement": false,
+          "name": "placer_region_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "oos_guid": {
+          "autoincrement": false,
+          "name": "oos_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "etp_id": {
+          "autoincrement": false,
+          "name": "etp_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url_oos": {
+          "autoincrement": false,
+          "name": "url_oos",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url_vsrz": {
+          "autoincrement": false,
+          "name": "url_vsrz",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_joint_market": {
+          "autoincrement": false,
+          "name": "is_joint_market",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_for_spare_parts": {
+          "autoincrement": false,
+          "name": "is_for_spare_parts",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "specialized_organization_id": {
+          "autoincrement": false,
+          "name": "specialized_organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specialized_organization_full_name": {
+          "autoincrement": false,
+          "name": "specialized_organization_full_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specialized_organization_short_name": {
+          "autoincrement": false,
+          "name": "specialized_organization_short_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specialized_organization_inn": {
+          "autoincrement": false,
+          "name": "specialized_organization_inn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specialized_organization_kpp": {
+          "autoincrement": false,
+          "name": "specialized_organization_kpp",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specialized_organization_ogrn": {
+          "autoincrement": false,
+          "name": "specialized_organization_ogrn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specialized_organization_guid": {
+          "autoincrement": false,
+          "name": "specialized_organization_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specialized_organization_role": {
+          "autoincrement": false,
+          "name": "specialized_organization_role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specialized_organization_region_id": {
+          "autoincrement": false,
+          "name": "specialized_organization_region_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "customers_access_control": {
+          "autoincrement": false,
+          "name": "customers_access_control",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "abandoned_reason": {
+          "autoincrement": false,
+          "name": "abandoned_reason",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "not_published_on_eis": {
+          "autoincrement": false,
+          "name": "not_published_on_eis",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "plan_type_id": {
+          "autoincrement": false,
+          "name": "plan_type_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_660156A26BF700BD": {
+          "name": "IDX_660156A26BF700BD",
+          "columns": [
+            "status_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_660156A2C54C8C93": {
+          "name": "IDX_660156A2C54C8C93",
+          "columns": [
+            "type_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_660156A2727ACA70": {
+          "name": "IDX_660156A2727ACA70",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_RegistrationNumber": {
+          "name": "Catalog_Procedure_RegistrationNumber",
+          "columns": [
+            "registration_number"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Placer": {
+          "name": "Catalog_Procedure_Placer",
+          "columns": [
+            "placer_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Placer_Inn": {
+          "name": "Catalog_Procedure_Placer_Inn",
+          "columns": [
+            "placer_inn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Placer_Kpp": {
+          "name": "Catalog_Procedure_Placer_Kpp",
+          "columns": [
+            "placer_kpp"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Placer_Ogrn": {
+          "name": "Catalog_Procedure_Placer_Ogrn",
+          "columns": [
+            "placer_ogrn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Placer_Role": {
+          "name": "Catalog_Procedure_Placer_Role",
+          "columns": [
+            "placer_role"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Placer_Guid": {
+          "name": "Catalog_Procedure_Placer_Guid",
+          "columns": [
+            "placer_guid"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Guid": {
+          "name": "Catalog_Procedure_Guid",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Specialized_Organization": {
+          "name": "Catalog_Procedure_Specialized_Organization",
+          "columns": [
+            "specialized_organization_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Specialized_Organization_Inn": {
+          "name": "Catalog_Procedure_Specialized_Organization_Inn",
+          "columns": [
+            "specialized_organization_inn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Specialized_Organization_Kpp": {
+          "name": "Catalog_Procedure_Specialized_Organization_Kpp",
+          "columns": [
+            "specialized_organization_kpp"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Specialized_Organization_Ogrn": {
+          "name": "Catalog_Procedure_Specialized_Organization_Ogrn",
+          "columns": [
+            "specialized_organization_ogrn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Specialized_Organization_Guid": {
+          "name": "Catalog_Procedure_Specialized_Organization_Guid",
+          "columns": [
+            "specialized_organization_guid"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Specialized_Organization_Role": {
+          "name": "Catalog_Procedure_Specialized_Organization_Role",
+          "columns": [
+            "specialized_organization_role"
+          ],
+          "isUnique": false
+        },
+        "IDX_660156A27BF3C49B": {
+          "name": "IDX_660156A27BF3C49B",
+          "columns": [
+            "plan_type_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_660156A27BF3C49B": {
+          "name": "FK_660156A27BF3C49B",
+          "tableFrom": "catalog_procedure",
+          "tableTo": "catalog_procedure_type",
+          "columnsFrom": [
+            "plan_type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_660156A26BF700BD": {
+          "name": "FK_660156A26BF700BD",
+          "tableFrom": "catalog_procedure",
+          "tableTo": "catalog_procedure_status",
+          "columnsFrom": [
+            "status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_660156A2727ACA70": {
+          "name": "FK_660156A2727ACA70",
+          "tableFrom": "catalog_procedure",
+          "tableTo": "catalog_procedure",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_660156A2C54C8C93": {
+          "name": "FK_660156A2C54C8C93",
+          "tableFrom": "catalog_procedure",
+          "tableTo": "catalog_procedure_type",
+          "columnsFrom": [
+            "type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_complaint": {
+      "name": "catalog_procedure_complaint",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_registration_number": {
+          "autoincrement": false,
+          "name": "procedure_registration_number",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "complaint_type": {
+          "autoincrement": false,
+          "name": "complaint_type",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "controlling_organization_id": {
+          "autoincrement": false,
+          "name": "controlling_organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_PROCEDURE_REGISTRATION_NUMBER": {
+          "name": "IDX_PROCEDURE_REGISTRATION_NUMBER",
+          "columns": [
+            "procedure_registration_number"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_favourite": {
+      "name": "catalog_procedure_favourite",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "member_id": {
+          "autoincrement": false,
+          "name": "member_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_A717F055A8CBA5F7": {
+          "name": "IDX_A717F055A8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Favourite_member": {
+          "name": "Catalog_Lot_Favourite_member",
+          "columns": [
+            "member_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_A717F055A8CBA5F7": {
+          "name": "FK_A717F055A8CBA5F7",
+          "tableFrom": "catalog_procedure_favourite",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_feature": {
+      "name": "catalog_procedure_feature",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type_id": {
+          "autoincrement": false,
+          "name": "type_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "procedure_id": {
+          "autoincrement": false,
+          "name": "procedure_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_1EDCF92FC54C8C93": {
+          "name": "IDX_1EDCF92FC54C8C93",
+          "columns": [
+            "type_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_1EDCF92F1624BCD2": {
+          "name": "IDX_1EDCF92F1624BCD2",
+          "columns": [
+            "procedure_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_1EDCF92FA8CBA5F7": {
+          "name": "IDX_1EDCF92FA8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_1EDCF92F1624BCD2": {
+          "name": "FK_1EDCF92F1624BCD2",
+          "tableFrom": "catalog_procedure_feature",
+          "tableTo": "catalog_procedure",
+          "columnsFrom": [
+            "procedure_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_1EDCF92FA8CBA5F7": {
+          "name": "FK_1EDCF92FA8CBA5F7",
+          "tableFrom": "catalog_procedure_feature",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_1EDCF92FC54C8C93": {
+          "name": "FK_1EDCF92FC54C8C93",
+          "tableFrom": "catalog_procedure_feature",
+          "tableTo": "catalog_procedure_feature_type",
+          "columnsFrom": [
+            "type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_feature_type": {
+      "name": "catalog_procedure_feature_type",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category": {
+          "autoincrement": false,
+          "name": "category",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "Catalog_Feature_TypeCode": {
+          "name": "Catalog_Feature_TypeCode",
+          "columns": [
+            "code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_integration_packet": {
+      "name": "catalog_procedure_integration_packet",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type_id": {
+          "autoincrement": false,
+          "name": "type_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status_id": {
+          "autoincrement": false,
+          "name": "status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "object_id": {
+          "autoincrement": false,
+          "name": "object_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "real_name": {
+          "autoincrement": false,
+          "name": "real_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "uri": {
+          "autoincrement": false,
+          "name": "uri",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hash": {
+          "autoincrement": false,
+          "name": "hash",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "autoincrement": false,
+          "name": "description",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "create_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "create_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "update_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "update_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_D2DC46C7C54C8C93": {
+          "name": "IDX_D2DC46C7C54C8C93",
+          "columns": [
+            "type_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_D2DC46C76BF700BD": {
+          "name": "IDX_D2DC46C76BF700BD",
+          "columns": [
+            "status_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Integration_Packet_ObjectID": {
+          "name": "Catalog_Procedure_Integration_Packet_ObjectID",
+          "columns": [
+            "object_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_D2DC46C76BF700BD": {
+          "name": "FK_D2DC46C76BF700BD",
+          "tableFrom": "catalog_procedure_integration_packet",
+          "tableTo": "catalog_procedure_integration_packet_status",
+          "columnsFrom": [
+            "status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_D2DC46C7C54C8C93": {
+          "name": "FK_D2DC46C7C54C8C93",
+          "tableFrom": "catalog_procedure_integration_packet",
+          "tableTo": "catalog_procedure_integration_packet_type",
+          "columnsFrom": [
+            "type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {
+        "UNIQ_D2DC46C72B6FCFB2": {
+          "name": "UNIQ_D2DC46C72B6FCFB2",
+          "columns": [
+            "guid"
+          ]
+        }
+      }
+    },
+    "catalog_procedure_integration_packet_status": {
+      "name": "catalog_procedure_integration_packet_status",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "UNIQ_92D029A177153098": {
+          "name": "UNIQ_92D029A177153098",
+          "columns": [
+            "code"
+          ]
+        }
+      }
+    },
+    "catalog_procedure_integration_packet_type": {
+      "name": "catalog_procedure_integration_packet_type",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "UNIQ_32C7FD177153098": {
+          "name": "UNIQ_32C7FD177153098",
+          "columns": [
+            "code"
+          ]
+        }
+      }
+    },
+    "catalog_procedure_lot": {
+      "name": "catalog_procedure_lot",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_id": {
+          "autoincrement": false,
+          "name": "status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_id": {
+          "autoincrement": false,
+          "name": "procedure_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "autoincrement": false,
+          "name": "parent_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "version": {
+          "autoincrement": false,
+          "name": "version",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordinal_number": {
+          "autoincrement": false,
+          "name": "ordinal_number",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subject": {
+          "autoincrement": false,
+          "name": "subject",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "request_start_give_datetime": {
+          "autoincrement": false,
+          "name": "request_start_give_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "request_end_give_datetime": {
+          "autoincrement": false,
+          "name": "request_end_give_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "request_review_end_datetime": {
+          "autoincrement": false,
+          "name": "request_review_end_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "trade_start_datetime": {
+          "autoincrement": false,
+          "name": "trade_start_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "trade_end_datetime": {
+          "autoincrement": false,
+          "name": "trade_end_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "regulated_datetime": {
+          "autoincrement": false,
+          "name": "regulated_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contract_start_price": {
+          "autoincrement": false,
+          "name": "contract_start_price",
+          "type": "double",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contract_start_price_currency_Id": {
+          "autoincrement": false,
+          "name": "contract_start_price_currency_Id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_joint_market": {
+          "autoincrement": false,
+          "name": "is_joint_market",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_for_spare_parts": {
+          "autoincrement": false,
+          "name": "is_for_spare_parts",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url_vsrz": {
+          "autoincrement": false,
+          "name": "url_vsrz",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "oos_guid": {
+          "autoincrement": false,
+          "name": "oos_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "etp_id": {
+          "autoincrement": false,
+          "name": "etp_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "additional_information": {
+          "autoincrement": false,
+          "name": "additional_information",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_contract_blocked": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "is_contract_blocked",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contract_formation_datetime": {
+          "autoincrement": false,
+          "name": "contract_formation_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ikz": {
+          "autoincrement": false,
+          "name": "ikz",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contract_start_price_spare_parts": {
+          "autoincrement": false,
+          "name": "contract_start_price_spare_parts",
+          "type": "double",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_drugs": {
+          "autoincrement": false,
+          "name": "is_drugs",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "has_request_provision": {
+          "autoincrement": false,
+          "name": "has_request_provision",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "has_contract_provision": {
+          "autoincrement": false,
+          "name": "has_contract_provision",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_747346416BF700BD": {
+          "name": "IDX_747346416BF700BD",
+          "columns": [
+            "status_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_747346411624BCD2": {
+          "name": "IDX_747346411624BCD2",
+          "columns": [
+            "procedure_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_74734641727ACA70": {
+          "name": "IDX_74734641727ACA70",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_127344415BF550BD": {
+          "name": "IDX_127344415BF550BD",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_747346411624BCD2": {
+          "name": "FK_747346411624BCD2",
+          "tableFrom": "catalog_procedure_lot",
+          "tableTo": "catalog_procedure",
+          "columnsFrom": [
+            "procedure_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_747346416BF700BD": {
+          "name": "FK_747346416BF700BD",
+          "tableFrom": "catalog_procedure_lot",
+          "tableTo": "catalog_procedure_status",
+          "columnsFrom": [
+            "status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_74734641727ACA70": {
+          "name": "FK_74734641727ACA70",
+          "tableFrom": "catalog_procedure_lot",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_lot_action": {
+      "name": "catalog_procedure_lot_action",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url": {
+          "autoincrement": false,
+          "name": "url",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "priority": {
+          "autoincrement": false,
+          "name": "priority",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role": {
+          "autoincrement": false,
+          "name": "allow_role",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role_except": {
+          "autoincrement": false,
+          "name": "allow_role_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_permission": {
+          "autoincrement": false,
+          "name": "allow_permission",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_permission_except": {
+          "autoincrement": false,
+          "name": "allow_permission_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_lot_status": {
+          "autoincrement": false,
+          "name": "allow_lot_status",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_lot_status_except": {
+          "autoincrement": false,
+          "name": "allow_lot_status_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_request_status": {
+          "autoincrement": false,
+          "name": "allow_request_status",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_request_status_except": {
+          "autoincrement": false,
+          "name": "allow_request_status_except",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_organization": {
+          "autoincrement": false,
+          "name": "allow_organization",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "style": {
+          "autoincrement": false,
+          "name": "style",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "opened_at": {
+          "autoincrement": false,
+          "name": "opened_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "secondary_name": {
+          "autoincrement": false,
+          "name": "secondary_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "secondary_priority": {
+          "autoincrement": false,
+          "name": "secondary_priority",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_secondary_head_action": {
+          "autoincrement": false,
+          "name": "is_secondary_head_action",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_DFAD5179A8CBA5F7": {
+          "name": "IDX_DFAD5179A8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Action_Code": {
+          "name": "Catalog_Action_Code",
+          "columns": [
+            "code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_DFAD5179A8CBA5F7": {
+          "name": "FK_DFAD5179A8CBA5F7",
+          "tableFrom": "catalog_procedure_lot_action",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_lot_customer": {
+      "name": "catalog_procedure_lot_customer",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_id": {
+          "autoincrement": false,
+          "name": "organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_full_name": {
+          "autoincrement": false,
+          "name": "organization_full_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_short_name": {
+          "autoincrement": false,
+          "name": "organization_short_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_inn": {
+          "autoincrement": false,
+          "name": "organization_inn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_kpp": {
+          "autoincrement": false,
+          "name": "organization_kpp",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_ogrn": {
+          "autoincrement": false,
+          "name": "organization_ogrn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_guid": {
+          "autoincrement": false,
+          "name": "organization_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_role": {
+          "autoincrement": false,
+          "name": "organization_role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_region_id": {
+          "autoincrement": false,
+          "name": "organization_region_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "delivery_region_id": {
+          "autoincrement": false,
+          "name": "delivery_region_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ikz": {
+          "autoincrement": false,
+          "name": "ikz",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_C4D19226A8CBA5F7": {
+          "name": "IDX_C4D19226A8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Customer_Organization": {
+          "name": "Catalog_Lot_Customer_Organization",
+          "columns": [
+            "organization_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Customer_Region": {
+          "name": "Catalog_Lot_Customer_Region",
+          "columns": [
+            "delivery_region_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Customer_Inn": {
+          "name": "Catalog_Lot_Customer_Inn",
+          "columns": [
+            "organization_inn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Customer_Kpp": {
+          "name": "Catalog_Lot_Customer_Kpp",
+          "columns": [
+            "organization_kpp"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Customer_Ogrn": {
+          "name": "Catalog_Lot_Customer_Ogrn",
+          "columns": [
+            "organization_ogrn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Customer_Guid": {
+          "name": "Catalog_Lot_Customer_Guid",
+          "columns": [
+            "organization_guid"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Customer_Role": {
+          "name": "Catalog_Lot_Customer_Role",
+          "columns": [
+            "organization_role"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_C4D19226A8CBA5F7": {
+          "name": "FK_C4D19226A8CBA5F7",
+          "tableFrom": "catalog_procedure_lot_customer",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_lot_event": {
+      "name": "catalog_procedure_lot_event",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publication_datetime": {
+          "autoincrement": false,
+          "name": "publication_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url": {
+          "autoincrement": false,
+          "name": "url",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canceled": {
+          "autoincrement": false,
+          "name": "canceled",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_role": {
+          "autoincrement": false,
+          "name": "allow_role",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "allow_organization": {
+          "autoincrement": false,
+          "name": "allow_organization",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "style": {
+          "autoincrement": false,
+          "name": "style",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "event_type": {
+          "autoincrement": false,
+          "name": "event_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_88535DE5A8CBA5F7": {
+          "name": "IDX_88535DE5A8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Event_Guid": {
+          "name": "Catalog_Lot_Event_Guid",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_88535DE5A8CBA5F7": {
+          "name": "FK_88535DE5A8CBA5F7",
+          "tableFrom": "catalog_procedure_lot_event",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_lot_item": {
+      "name": "catalog_procedure_lot_item",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_customer_id": {
+          "autoincrement": false,
+          "name": "lot_customer_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordinal_number": {
+          "autoincrement": false,
+          "name": "ordinal_number",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "okpd2_id": {
+          "autoincrement": false,
+          "name": "okpd2_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type_id": {
+          "autoincrement": false,
+          "name": "type_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_843649E6A8CBA5F7": {
+          "name": "IDX_843649E6A8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_843649E6C6E1754F": {
+          "name": "IDX_843649E6C6E1754F",
+          "columns": [
+            "lot_customer_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Item_okpd2": {
+          "name": "Catalog_Lot_Item_okpd2",
+          "columns": [
+            "okpd2_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_843649E6C54C8C93": {
+          "name": "IDX_843649E6C54C8C93",
+          "columns": [
+            "type_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_843649E6A8CBA5F7": {
+          "name": "FK_843649E6A8CBA5F7",
+          "tableFrom": "catalog_procedure_lot_item",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_843649E6C54C8C93": {
+          "name": "FK_843649E6C54C8C93",
+          "tableFrom": "catalog_procedure_lot_item",
+          "tableTo": "catalog_procedure_lot_item_type",
+          "columnsFrom": [
+            "type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_843649E6C6E1754F": {
+          "name": "FK_843649E6C6E1754F",
+          "tableFrom": "catalog_procedure_lot_item",
+          "tableTo": "catalog_procedure_lot_customer",
+          "columnsFrom": [
+            "lot_customer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_lot_item_type": {
+      "name": "catalog_procedure_lot_item_type",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "autoincrement": false,
+          "name": "active",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_lot_observer": {
+      "name": "catalog_procedure_lot_observer",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_id": {
+          "autoincrement": false,
+          "name": "organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_DE8758C8A8CBA5F7": {
+          "name": "IDX_DE8758C8A8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Procedure_Observer_Organization": {
+          "name": "Catalog_Procedure_Observer_Organization",
+          "columns": [
+            "organization_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_DE8758C8A8CBA5F7": {
+          "name": "FK_DE8758C8A8CBA5F7",
+          "tableFrom": "catalog_procedure_lot_observer",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_lot_responsible_officer": {
+      "name": "catalog_procedure_lot_responsible_officer",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_id": {
+          "autoincrement": false,
+          "name": "organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "responsible_officer_id": {
+          "autoincrement": false,
+          "name": "responsible_officer_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_50D5F0DAA8CBA5F7": {
+          "name": "IDX_50D5F0DAA8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "idx_organization_id": {
+          "name": "idx_organization_id",
+          "columns": [
+            "organization_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_50D5F0DA3EDC7F21": {
+          "name": "IDX_50D5F0DA3EDC7F21",
+          "columns": [
+            "responsible_officer_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_50D5F0DA3EDC7F21": {
+          "name": "FK_50D5F0DA3EDC7F21",
+          "tableFrom": "catalog_procedure_lot_responsible_officer",
+          "tableTo": "catalog_procedure_responsible_officer",
+          "columnsFrom": [
+            "responsible_officer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_50D5F0DAA8CBA5F7": {
+          "name": "FK_50D5F0DAA8CBA5F7",
+          "tableFrom": "catalog_procedure_lot_responsible_officer",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_request": {
+      "name": "catalog_procedure_request",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status_id": {
+          "autoincrement": false,
+          "name": "status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "additional_status_id": {
+          "autoincrement": false,
+          "name": "additional_status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lot_id": {
+          "autoincrement": false,
+          "name": "lot_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "autoincrement": false,
+          "name": "parent_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "send_datetime": {
+          "autoincrement": false,
+          "name": "send_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_id": {
+          "autoincrement": false,
+          "name": "organization_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_full_name": {
+          "autoincrement": false,
+          "name": "organization_full_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_short_name": {
+          "autoincrement": false,
+          "name": "organization_short_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_inn": {
+          "autoincrement": false,
+          "name": "organization_inn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_kpp": {
+          "autoincrement": false,
+          "name": "organization_kpp",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_ogrn": {
+          "autoincrement": false,
+          "name": "organization_ogrn",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_guid": {
+          "autoincrement": false,
+          "name": "organization_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_role": {
+          "autoincrement": false,
+          "name": "organization_role",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_region_id": {
+          "autoincrement": false,
+          "name": "organization_region_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spec_account": {
+          "autoincrement": false,
+          "name": "spec_account",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_number": {
+          "autoincrement": false,
+          "name": "application_number",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country_goods": {
+          "autoincrement": false,
+          "name": "country_goods",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_3A9C03D66BF700BD": {
+          "name": "IDX_3A9C03D66BF700BD",
+          "columns": [
+            "status_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_3A9C03D64FDA6E0": {
+          "name": "IDX_3A9C03D64FDA6E0",
+          "columns": [
+            "additional_status_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_3A9C03D6A8CBA5F7": {
+          "name": "IDX_3A9C03D6A8CBA5F7",
+          "columns": [
+            "lot_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_3A9C03D6727ACA70": {
+          "name": "IDX_3A9C03D6727ACA70",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Request_Organization": {
+          "name": "Catalog_Lot_Request_Organization",
+          "columns": [
+            "organization_id"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Request_Organization_Inn": {
+          "name": "Catalog_Lot_Request_Organization_Inn",
+          "columns": [
+            "organization_inn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Request_Organization_Kpp": {
+          "name": "Catalog_Lot_Request_Organization_Kpp",
+          "columns": [
+            "organization_kpp"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Request_Organization_Ogrn": {
+          "name": "Catalog_Lot_Request_Organization_Ogrn",
+          "columns": [
+            "organization_ogrn"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Request_Organization_Role": {
+          "name": "Catalog_Lot_Request_Organization_Role",
+          "columns": [
+            "organization_role"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Request_Organization_Guid": {
+          "name": "Catalog_Lot_Request_Organization_Guid",
+          "columns": [
+            "organization_guid"
+          ],
+          "isUnique": false
+        },
+        "Catalog_Lot_Request_Guid": {
+          "name": "Catalog_Lot_Request_Guid",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_3A9C03D64FDA6E0": {
+          "name": "FK_3A9C03D64FDA6E0",
+          "tableFrom": "catalog_procedure_request",
+          "tableTo": "catalog_procedure_status",
+          "columnsFrom": [
+            "additional_status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_3A9C03D66BF700BD": {
+          "name": "FK_3A9C03D66BF700BD",
+          "tableFrom": "catalog_procedure_request",
+          "tableTo": "catalog_procedure_status",
+          "columnsFrom": [
+            "status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_3A9C03D6727ACA70": {
+          "name": "FK_3A9C03D6727ACA70",
+          "tableFrom": "catalog_procedure_request",
+          "tableTo": "catalog_procedure_request",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_3A9C03D6A8CBA5F7": {
+          "name": "FK_3A9C03D6A8CBA5F7",
+          "tableFrom": "catalog_procedure_request",
+          "tableTo": "catalog_procedure_lot",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_responsible_officer": {
+      "name": "catalog_procedure_responsible_officer",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "default": "''",
+          "autoincrement": false,
+          "name": "first_name",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "default": "''",
+          "autoincrement": false,
+          "name": "last_name",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "middle_name": {
+          "default": "''",
+          "autoincrement": false,
+          "name": "middle_name",
+          "type": "varchar(300)",
           "primaryKey": false,
           "notNull": true
         },
         "email": {
+          "default": "''",
           "autoincrement": false,
           "name": "email",
-          "type": "varchar(256)",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
+        },
+        "member_id": {
+          "autoincrement": false,
+          "name": "member_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "idx_member": {
+          "name": "idx_member",
+          "columns": [
+            "member_id"
+          ],
+          "isUnique": false
+        },
+        "idx_email": {
+          "name": "idx_email",
+          "columns": [
+            "email"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "catalog_procedure_status": {
+      "name": "catalog_procedure_status",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "autoincrement": false,
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "Catalog_Procedure_StatusCode": {
+          "name": "Catalog_Procedure_StatusCode",
+          "columns": [
+            "code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "Catalog_Procedure_StatusCodeTypeUniq": {
+          "name": "Catalog_Procedure_StatusCodeTypeUniq",
+          "columns": [
+            "code",
+            "type"
+          ]
+        }
+      }
+    },
+    "catalog_procedure_type": {
+      "name": "catalog_procedure_type",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "abbreviation": {
+          "autoincrement": false,
+          "name": "abbreviation",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "orderPriority": {
+          "autoincrement": false,
+          "name": "orderPriority",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "Catalog_Procedure_Type_Code": {
+          "name": "Catalog_Procedure_Type_Code",
+          "columns": [
+            "code"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "catalog_sphinx_delta_counter": {
+      "name": "catalog_sphinx_delta_counter",
+      "columns": {
+        "index_name": {
+          "autoincrement": false,
+          "name": "index_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "counter": {
+          "autoincrement": false,
+          "name": "counter",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "datetime": {
+          "autoincrement": false,
+          "name": "datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "index_name": {
+          "name": "index_name",
+          "columns": [
+            "index_name"
+          ]
+        }
+      }
+    },
+    "doctrine_migration_versions": {
+      "name": "doctrine_migration_versions",
+      "columns": {
+        "version": {
+          "autoincrement": false,
+          "name": "version",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "integration_catalog_packet": {
+      "name": "integration_catalog_packet",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type_id": {
+          "autoincrement": false,
+          "name": "type_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status_id": {
+          "autoincrement": false,
+          "name": "status_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guid": {
+          "autoincrement": false,
+          "name": "guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "object_id": {
+          "autoincrement": false,
+          "name": "object_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "real_name": {
+          "autoincrement": false,
+          "name": "real_name",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "uri": {
+          "autoincrement": false,
+          "name": "uri",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hash": {
+          "autoincrement": false,
+          "name": "hash",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "autoincrement": false,
+          "name": "description",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "default": "'0000-00-00 00:00:00'",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "default": "'CURRENT_TIMESTAMP'",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "onUpdate": true
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_4E24CD91C54C8C93": {
+          "name": "IDX_4E24CD91C54C8C93",
+          "columns": [
+            "type_id"
+          ],
+          "isUnique": false
+        },
+        "IDX_4E24CD916BF700BD": {
+          "name": "IDX_4E24CD916BF700BD",
+          "columns": [
+            "status_id"
+          ],
+          "isUnique": false
+        },
+        "Integration_Catalog_Packet_ObjectID": {
+          "name": "Integration_Catalog_Packet_ObjectID",
+          "columns": [
+            "object_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_4E24CD916BF700BD": {
+          "name": "FK_4E24CD916BF700BD",
+          "tableFrom": "integration_catalog_packet",
+          "tableTo": "integration_catalog_packet_status",
+          "columnsFrom": [
+            "status_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "FK_4E24CD91C54C8C93": {
+          "name": "FK_4E24CD91C54C8C93",
+          "tableFrom": "integration_catalog_packet",
+          "tableTo": "integration_catalog_packet_type",
+          "columnsFrom": [
+            "type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {
+        "UNIQ_4E24CD912B6FCFB2": {
+          "name": "UNIQ_4E24CD912B6FCFB2",
+          "columns": [
+            "guid"
+          ]
+        }
+      }
+    },
+    "integration_catalog_packet_status": {
+      "name": "integration_catalog_packet_status",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "UNIQ_297054B777153098": {
+          "name": "UNIQ_297054B777153098",
+          "columns": [
+            "code"
+          ]
+        }
+      }
+    },
+    "integration_catalog_packet_type": {
+      "name": "integration_catalog_packet_type",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "autoincrement": false,
+          "name": "code",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {
+        "UNIQ_E80493FE77153098": {
+          "name": "UNIQ_E80493FE77153098",
+          "columns": [
+            "code"
+          ]
+        }
+      }
+    },
+    "organization_procedure_regulated_datetime": {
+      "name": "organization_procedure_regulated_datetime",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "procedure_id": {
+          "autoincrement": false,
+          "name": "procedure_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization": {
+          "autoincrement": false,
+          "name": "organization",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "regulated_datetime": {
+          "autoincrement": false,
+          "name": "regulated_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "IDX_83326F291624BCD2": {
+          "name": "IDX_83326F291624BCD2",
+          "columns": [
+            "procedure_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "FK_83326F291624BCD2": {
+          "name": "FK_83326F291624BCD2",
+          "tableFrom": "organization_procedure_regulated_datetime",
+          "tableTo": "catalog_procedure",
+          "columnsFrom": [
+            "procedure_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "procedure_access": {
+      "name": "procedure_access",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_operator_id": {
+          "autoincrement": false,
+          "name": "user_operator_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_operator_guid": {
+          "autoincrement": false,
+          "name": "user_operator_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "autoincrement": false,
+          "name": "user_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_guid": {
+          "autoincrement": false,
+          "name": "user_guid",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "active": {
+          "autoincrement": false,
+          "name": "active",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "create_datetime": {
+          "autoincrement": false,
+          "name": "create_datetime",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "procedure_number": {
+          "autoincrement": false,
+          "name": "procedure_number",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "procedure_type": {
+          "autoincrement": false,
+          "name": "procedure_type",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "procedure_id": {
+          "autoincrement": false,
+          "name": "procedure_id",
+          "type": "int(11)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "placer_inn": {
+          "autoincrement": false,
+          "name": "placer_inn",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "compositePrimaryKeys": {},
