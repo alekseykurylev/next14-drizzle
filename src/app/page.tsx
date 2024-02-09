@@ -79,8 +79,13 @@ export default async function Home({ searchParams }: SearchParamsProps) {
                 <td className="border-b border-slate-700  p-4 pl-8  ">
                   {user.id}
                 </td>
-                <td className="border-b border-slate-700  p-4 pl-8  ">
-                  {user.name}
+                <td className="border-b border-slate-700  p-4 pl-8 ">
+                  <Link
+                    href={`/${String(user.id)}`}
+                    style={{ textDecoration: "underline" }}
+                  >
+                    {user.name}
+                  </Link>
                 </td>
                 <td className="border-b border-slate-700  p-4 pl-8  ">
                   {user.email}
